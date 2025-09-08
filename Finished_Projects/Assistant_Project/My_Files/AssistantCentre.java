@@ -32,8 +32,8 @@ public class AssistantCentre
      */
     public int getNumberOfAssistants()
     {
-        return assistants.size() + 1; //amount of items in array
-    }                                 //is the size of array + 1
+        return assistants.size(); //amount of items in array
+    }                                 //is the size of array
     
     /**
      * Get the number of assistants in the given location.
@@ -61,16 +61,8 @@ public class AssistantCentre
      */
     public void list()
     {
-        int identity;
-        int location;//initialises variables to change for each assistant
-        boolean available;
         for(Assistant assistant : assistants){
-            identity = assistant.getIdentity();
-            location = assistant.getLocation();// changes variables for 
-            available = assistant.isAvailable();//current assistant
-            System.out.println("Identity - " + identity);
-            System.out.println("Location - " + location);//prints variables
-            System.out.println("Available - " + available);
+            assistant.getDetails();
         }
     }
     
@@ -85,7 +77,7 @@ public class AssistantCentre
       for(Assistant assistant : assistants){
           if(identity == assistant.getIdentity()){ //finds assistant
               assistant.moveTo(location); //changes location of assistant
-            if(available == true){
+            if(available){
                   assistant.setAvailable(); //changes availability
               }
               else{
@@ -103,19 +95,13 @@ public class AssistantCentre
      */
     public boolean removeAssistant(int identity)
     {
-        boolean found = false;
-        int index = 0;
         for(Assistant assistant : assistants){
             if(identity ==  assistant.getIdentity()){
-                assistants.remove(index);
-                found = true;
-                index++; //removes assistant from the array is its the 
-            }            //right one
-            else{
-               index++; 
-            }
+                assistants.remove(assistant);
+                return true;
+            }            
         }
-        return found;
+        return false;
     }
     
     /**
@@ -131,35 +117,44 @@ public class AssistantCentre
      */
     public Assistant findNearestAvailable(int location)
     {
-        int distance = 0;
-        int index = 0;
-        Assistant nearestAssistant = assistants.get(0);
-        boolean found = false;
+        ArrayList<Assistant> available = new ArrayList<>();
+
         for(Assistant assistant : assistants){
-            if(assistant.isAvailable() == true){
-                if(location == assistant.getLocation()){
-                    nearestAssistant = assistants.get(index);
-                    found = true;
-                }
-                else{
-                    distance++;
-                }
-                if(distance>0){
-                    nearestAssistant = assistants.get(index);
-                    found = true;
-                }
-                index++;
-            }
-            else{
-                found = false;
-                nearestAssistant = assistants.get(0);
+            if(assistant.isAvailable()){
+                available.add(assistant);
             }
         }
-        if(found == true){
-            return nearestAssistant;
-        }
-        else{
+
+        if(available.isEmpty()){
             return null;
         }
+
+        int minDistance = Integer.MAX_VALUE;
+
+        for(Assistant assistant : available){
+            int currentDistance = Math.abs(assistant.getLocation() - location);
+            if(currentDistance < minDistance){
+                minDistance = currentDistance;
+            }
+        }
+
+        for(Assistant assistant : available){
+            if((Math.abs(assistant.getLocation() - location) > minDistance)){
+                available.remove(assistant);
+            }
+        }
+
+        int minIdentity = Integer.MAX_VALUE;
+        Assistant minAssistant = null;
+
+        for(Assistant assistant : available){
+            if(assistant.getIdentity() < minIdentity){
+                minIdentity = assistant.getIdentity();
+                minAssistant = assistant;
+            }
+        }
+        return minAssistant;
+
+
     }
 }
