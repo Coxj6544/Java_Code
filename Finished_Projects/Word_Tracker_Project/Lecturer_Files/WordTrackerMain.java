@@ -4,6 +4,8 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 
+import My_Files.WordTracker;
+
 /**
  * A simple 'driver' for the WordTracker class.
  * 

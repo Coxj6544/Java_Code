@@ -1,0 +1,2 @@
+A project consisting of a program where you pass individual words to an ArrayList.
+This ArrayList is then used to determine the count of words in a text, the count of substrings in a text, and if certain words follow eachother.
