@@ -5,7 +5,7 @@
  */
 import java.util.*;
 public class RBT {
-    private Node root;
+    public Node root;
 
     public RBT() {}
 
@@ -70,31 +70,65 @@ public class RBT {
         root.setColor(Node.Color.BLACK);
     }
 
-    private Node nodeInsertData(Node r, int x) {
+    public Node nodeInsertData(Node r, int x) {
         if (r == null) return new Node(x, Node.Color.RED);
-        else 
+        else{
+            if(x < r.getData()){
+                r.setLeft(nodeInsertData(r.getLeft(), x));
+            } 
+            else {
+                r.setRight(nodeInsertData(r.getRight(), x));
+            }
+        }
+        return r; 
 
-        // TODO: Write this method!
-        throw new UnsupportedOperationException("You need to code this part yourself!");
+        // TODO: Add the RBT balancing code here!
     }
 
-    private Node rotateRight(Node h) {
+    public Node rotateRight(Node h) {
         assert (h != null) && isRed(h.getLeft());
+        Node y = h.getLeft();
+        Node tempNode = y.getRight();
 
-        // TODO: Write this method!
-        throw new UnsupportedOperationException("You need to code this part yourself!");
+        y.setRight(h);
+        h.setLeft(tempNode);
+        return y;
     }
  
-    private Node rotateLeft(Node h) {
+    public Node rotateLeft(Node h) {
         assert (h != null) && isRed(h.getRight());
+        Node y = h.getRight();
+        Node tempNode = y.getLeft();
 
-        // TODO: Write this method!
-        throw new UnsupportedOperationException("You need to code this part yourself!");
+
+        y.setLeft(h);
+        h.setRight(tempNode);
+        return y;
     }
 
     // flip the colors of a node and its two children
-    private void flipColors(Node h) {
-        // TODO: Write this method!
-        throw new UnsupportedOperationException("You need to code this part yourself!");
+    public void flipColors(Node h) {
+        if(h.getColor() == Node.Color.RED){
+            h.setColor(Node.Color.BLACK);
+        }
+        else{
+            h.setColor(Node.Color.RED);
+        }
+        if(h.getLeft() != null){
+            if(h.getLeft().getColor() == Node.Color.RED){
+                h.getLeft().setColor(Node.Color.BLACK);
+            }
+            else{
+                h.getLeft().setColor(Node.Color.RED);
+            }
+        }
+        if(h.getRight() != null){
+            if(h.getRight().getColor() == Node.Color.RED){
+                h.getRight().setColor(Node.Color.BLACK);
+            }
+            else{
+                h.getRight().setColor(Node.Color.RED);
+            }
+        }
     }
 }

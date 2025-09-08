@@ -2,63 +2,63 @@ Assignment 1: Red-Black Tree Insertion
  COMP5180
  October 20th, 2023
 
- 1 Overview
+ 1 Overview:
  For this assignment, you will implement the insertion operation for a Red
-Black tree, as discussed in the lectures. You will need to fill in code for
+ Black tree, as discussed in the lectures. You will need to fill in code for
  the methods in the RBT class related to insertion. Your code should correctly
  insert an element into a Red-Black tree, and correctly maintain the invariants
  of the data structure. You will also need to write comments in your code to
  demonstrate that you understand the algorithm.
  The zip archive A1.zip contains the following files:
  • RBT.java– This is the class containing the implementation of the Red
-Black tree. You will need to modify this class!
+    Black tree. You will need to modify this class!
  • Node.java– This is a class that represents nodes in a Red-Black tree.
- You should not modify this class.
+     You should not modify this class.
  • RunRBT.java– This is a class that runs the code from the RBT class
- with some example data. You are free to modify this class, but it is
- not required.
- Your task will be to complete the following methods in RBT.java:
+     with some example data. You are free to modify this class, but it is
+     not required.
+     Your task will be to complete the following methods in RBT.java:
  • private Node nodeInsertData(Node r, int x)
- This method should insert the number x into the tree rooted at node
- r, and then fix any violations of the Red-Black tree properties.
+     This method should insert the number x into the tree rooted at node
+     r, and then fix any violations of the Red-Black tree properties.
  • private Node rotateRight(Node h)
- This method should do a right rotation on a sub-tree rooted at node h.
- 1
-• private Node rotateLeft(Node h)
- This method should do a left rotation on a sub-tree rooted at node h.
+     This method should do a right rotation on a sub-tree rooted at node h.
+ • private Node rotateLeft(Node h)
+     This method should do a left rotation on a sub-tree rooted at node h.
  • private void flipColors(Node h)
- This method should flip the colors of a node h and its two children.
- Note that you will likely find it convenient for these methods to call each
- other! For example, your nodeInsertData method will likely call one or more
- of the rotate methods, because the insertion method will be responsible for
- “fixing” or rebalancing the tree after inserting a new node.
- As a general strategy, your nodeInsertData(Node r, int x) method
- should do the following:
+     This method should flip the colors of a node h and its two children.
+     Note that you will likely find it convenient for these methods to call each
+     other! For example, your nodeInsertData method will likely call one or more
+     of the rotate methods, because the insertion method will be responsible for
+     “fixing” or rebalancing the tree after inserting a new node.
+
+As a general strategy, your nodeInsertData(Node r, int x) method
+should do the following:
  1. insert a new node containing x into the tree rooted at Node r, where
- the insertion should follow the logic of a binary search tree (that is,
- compare x against the data in r; if it is less insert it into the left sub
-tree, if it is greater insert it into the right sub-tree, and if the node is
- null make and return a new node);
+    the insertion should follow the logic of a binary search tree (that is,
+    compare x against the data in r; if it is less insert it into the left sub
+    tree, if it is greater insert it into the right sub-tree, and if the node is
+    null make and return a new node);
  2. inspect the colors of the tree to check if there are any violations of
- the Red-Black tree properties, and if there are, fix the changes using
- rotations and/or color changes (see cases 1-4 in the lecture slides).
- You can check your code by running the main method in the RunRBT class.
- It will construct two large Red-Black trees using your insertion methods, and
- print the result along with a few properties (maximum tree height, sorted
- status, etc). You can (and are encouraged to) use this class to add more tests
- of your own.
+    the Red-Black tree properties, and if there are, fix the changes using
+     rotations and/or color changes (see cases 1-4 in the lecture slides).
+     You can check your code by running the main method in the RunRBT class.
+     It will construct two large Red-Black trees using your insertion methods, and
+     print the result along with a few properties (maximum tree height, sorted
+     status, etc). You can (and are encouraged to) use this class to add more tests
+     of your own.
+
  You can assume that your method will only be called on distinct inputs
  (meaning, you do not need to account for duplicate insertions). Furthermore,
  you do not have to worry about deleting data from the tree, or changing data
  in-place.
+
  2 Criteria
  You will be marked on whether your program performs correctly on new,
  unseen data, and how well your work evidences your understanding of the
  Red-Black tree case study. We will run tests on your code for functionality
  during marking. We will also inspect your code.
 
-
- 2
 The total marks for this assessment are divided into several categories.
  The mark allotment for each category has been indicated at the beginning of
  each of the following sub-sections. You will be marked based on the following
@@ -93,27 +93,3 @@ versity Policies and Procedures regarding Academic Misconduct.
  BST is maintained. That is, for a node r, all of the nodes to the left of r
  contain data that is less than r, and all of the nodes to the right of r contain
  data that is greater than r.
-
-
- 3
-In the final marking, 25% of your marks will be from correctness and 15%
- will be from understanding of this part of your code, totalling 40% of the
- total marks.
- 2.2 RBT Fixes: 60% of total marks
- The second thing that the method nodeInsertData(Node r, int x) must
- do is fix any violations of the Red-Black tree properties that may have been
- invalidated by the insertion of the new node.
- Todothis, you should implement the helper methods rotateRight(Node h),
- rotateLeft(Node h), and flipColors(Node h). Your insertion method
- will need to determine what needs to be done to fix the current sub-tree, and
- call appropriate helper methods.
- In the final marking, each of these methods will account for 20% of your
- total marks (15% for correctness and 5% for understanding), totalling 60%
- of the total marks.
- 3 Deliverable
- Youmustsubmityourmodified RBT.java file to Moodle. Changethe @author
- f
- ield in the comment at the top of the java file to include your Kent username.
- Do not rename this file, do not change any method names or signatures, and
- do not submit any additional files! The code that you submit should compile
- and run with the provided Node.java file.
