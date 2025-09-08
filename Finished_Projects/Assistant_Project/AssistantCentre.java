@@ -1,3 +1,5 @@
+
+
 import java.util.*;
 /**
  * Keep track of multiple assistants.
@@ -129,8 +131,6 @@ public class AssistantCentre
      */
     public Assistant findNearestAvailable(int location)
     {
-        int identity;
-        int currentLocation;
         int distance = 0;
         int index = 0;
         Assistant nearestAssistant = assistants.get(0);
